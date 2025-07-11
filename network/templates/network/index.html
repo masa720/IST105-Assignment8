@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DHCP IP Assignment</title>
+</head>
+<body>
+    <h1>Network Configuration Request</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_mac_address">MAC Address:</label><br>
+        {{ form.mac_address }}<br><br>
+
+        <label for="id_dhcp_version">DHCP Version:</label><br>
+        {{ form.dhcp_version }}<br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if assigned_ip %}
+        <h2>Assigned IP and Lease Info</h2>
+        <p>MAC Address: {{ mac_address }}</p>
+        <p>DHCP Version: {{ dhcp_version }}</p>
+        <p>Assigned IP: {{ assigned_ip }}</p>
+        <p>Lease Time: 3600 seconds</p>
+    {% endif %}
+
+    <hr>
+    <a href="{% url 'leases' %}">View All Leases</a>
+</body>
+</html>
